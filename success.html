@@ -3,19 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>提交成功</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>预约提交成功</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="success-body">
-  <section class="success-card">
-    <div class="check">✓</div>
-    <h1>预约已提交</h1>
-    <p id="successText">感谢您的预约，工作人员将尽快与您确认参观安排。</p>
-    <a href="index.html" class="primary-btn">返回首页</a>
-  </section>
-  <script>
-    const name = sessionStorage.getItem('lastBookingName');
-    if (name) document.getElementById('successText').textContent = `${name}，感谢您的预约，工作人员将尽快与您确认参观安排。`;
-  </script>
+<body>
+  <main class="success-page">
+    <div class="success-card">
+      <img src="logo.webp" alt="NOITOM ROBOTICS" class="logo success-logo" />
+      <h1>预约已提交</h1>
+      <p>感谢您的预约，工作人员将根据场地安排与您确认参观时间。</p>
+      <a href="index.html" class="primary-link">返回首页</a>
+    </div>
+  </main>
 </body>
 </html>

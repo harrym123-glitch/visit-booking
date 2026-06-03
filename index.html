@@ -4,73 +4,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>诺亦腾东升具身智能机器人训练中心｜参观预约</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="hero">
-    <nav class="nav">
-      <div class="brand">诺亦腾东升具身智能机器人训练中心</div>
-      <a href="admin.html" class="admin-link">后台登录</a>
-    </nav>
-    <div class="hero-content">
-      <p class="eyebrow">Embodied AI Robotics Training Center</p>
-      <h1>场地参观预约</h1>
-      <p class="subtitle">面向机器人、具身智能、动作捕捉与高精度交互数据采集场景，提供专业化参观接待预约。</p>
-      <a href="#booking" class="primary-btn">立即预约参观</a>
-    </div>
+  <header class="site-header">
+    <img src="logo.webp" alt="NOITOM ROBOTICS" class="logo" />
+    <a href="admin.html" class="admin-link">管理后台</a>
   </header>
 
   <main>
-    <section class="section intro">
+    <section class="hero">
+      <p class="eyebrow">EMBODIED INTELLIGENCE TRAINING CENTER</p>
+      <h1>诺亦腾东升具身智能机器人训练中心</h1>
+      <p class="subtitle">场地参观预约系统</p>
+      <div class="hero-line"></div>
+    </section>
+
+    <section class="intro-card">
       <h2>场地介绍</h2>
       <p>
-        诺亦腾东升具身智能机器人训练中心围绕具身智能机器人训练、遥操作数据采集、动作捕捉与多场景交互实验建设，
-        设置多个功能区域，支持机器人运动控制、环境感知、场景交互与高质量数据采集等应用参观与交流。
+        本中心面向具身智能机器人训练、动作捕捉、数据采集、遥操作验证与多场景交互测试等需求，
+        配备动作捕捉区、运控训练区、高精度交互数据采集区、UMI 数据采集区及模拟场景区域。
       </p>
-      <div class="grid">
-        <div class="card"><h3>动作捕捉区</h3><p>支持机器人、人体动作及复杂运动轨迹采集展示。</p></div>
-        <div class="card"><h3>运控训练区</h3><p>用于机器人运动控制、路径规划及训练流程参观。</p></div>
-        <div class="card"><h3>高精度交互数据采集区</h3><p>面向多模态交互、操作任务与数据闭环采集。</p></div>
-        <div class="card"><h3>UMI 数据采集区</h3><p>支持手部操作、遥操作与高精度交互数据演示。</p></div>
-        <div class="card wide"><h3>模拟场景区域</h3><p>包含超市、卧室、客厅、厨房、洗手间、流水线等真实任务场景。</p></div>
+      <div class="zone-grid">
+        <span>动作捕捉区</span>
+        <span>运控训练区</span>
+        <span>高精度交互数据采集区</span>
+        <span>UMI 数据采集区</span>
+        <span>模拟场景区域</span>
       </div>
     </section>
 
-    <section id="booking" class="section booking-section">
-      <div class="form-wrap">
-        <div>
-          <p class="eyebrow dark">Visit Booking</p>
-          <h2>填写参观预约</h2>
-          <p class="form-note">请填写真实信息，提交后工作人员将根据预约时间与接待安排进行确认。</p>
-        </div>
-        <form id="bookingForm" class="booking-form">
-          <label>姓名<input type="text" id="name" required placeholder="请输入姓名" /></label>
-          <label>电话<input type="tel" id="phone" required placeholder="请输入联系电话" /></label>
-          <label>单位<input type="text" id="company" required placeholder="请输入单位/公司名称" /></label>
-          <label>参观人数<input type="number" id="people" required min="1" placeholder="请输入人数" /></label>
-          <label>日期<input type="date" id="date" required /></label>
-          <label>时间段
-            <select id="timeSlot" required>
-              <option value="">请选择时间段</option>
-              <option>09:00 - 10:00</option>
-              <option>10:00 - 11:00</option>
-              <option>11:00 - 12:00</option>
-              <option>14:00 - 15:00</option>
-              <option>15:00 - 16:00</option>
-              <option>16:00 - 17:00</option>
-            </select>
-          </label>
-          <label class="full">备注<textarea id="remark" rows="4" placeholder="可填写参观目的、关注方向或其他需求"></textarea></label>
-          <button type="submit" class="submit-btn">提交预约</button>
-          <p id="formMessage" class="message"></p>
-        </form>
-      </div>
+    <section class="booking-card">
+      <h2>预约参观</h2>
+      <p class="form-note">请填写参观预约信息，提交后工作人员将根据场地安排进行确认。</p>
+      <form id="bookingForm">
+        <label>
+          预约公司
+          <input type="text" id="company" placeholder="请输入公司 / 单位名称" required />
+        </label>
+
+        <label>
+          参观人数
+          <input type="number" id="peopleCount" min="1" max="200" placeholder="请输入人数" required />
+        </label>
+
+        <label>
+          日期
+          <input type="date" id="date" required />
+        </label>
+
+        <label>
+          时间
+          <select id="timeSlot" required>
+            <option value="">请选择时间</option>
+          </select>
+        </label>
+
+        <button type="submit">提交预约</button>
+        <p id="message" class="message"></p>
+      </form>
     </section>
   </main>
 
   <footer>© 诺亦腾东升具身智能机器人训练中心｜场地参观预约系统</footer>
 
-  <script type="module" src="firebase-config.js"></script>
   <script type="module" src="app.js"></script>
 </body>
 </html>

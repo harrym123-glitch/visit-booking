@@ -1,44 +1,66 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 
-const form = document.getElementById("bookingForm");
-const msg = document.getElementById("formMessage");
-let db = null;
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-try {
-  const app = initializeApp(firebaseConfig);
-  db = getFirestore(app);
-} catch (err) {
-  console.error(err);
+const form = document.getElementById("bookingForm");
+const message = document.getElementById("message");
+const timeSlot = document.getElementById("timeSlot");
+const dateInput = document.getElementById("date");
+
+function pad(num) {
+  return String(num).padStart(2, "0");
 }
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  msg.textContent = "正在提交...";
+function buildTimeSlots() {
+  for (let hour = 10; hour <= 18; hour++) {
+    for (let minute = 0; minute < 60; minute += 15) {
+      if (hour === 18 && minute > 0) continue;
+      const time = `${pad(hour)}:${pad(minute)}`;
+      const option = document.createElement("option");
+      option.value = time;
+      option.textContent = time;
+      timeSlot.appendChild(option);
+    }
+  }
+}
 
-  const data = {
-    name: document.getElementById("name").value.trim(),
-    phone: document.getElementById("phone").value.trim(),
+function setMinDate() {
+  const today = new Date();
+  dateInput.min = today.toISOString().split("T")[0];
+}
+
+buildTimeSlots();
+setMinDate();
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  message.textContent = "正在提交…";
+  message.className = "message loading";
+
+  const booking = {
     company: document.getElementById("company").value.trim(),
-    people: Number(document.getElementById("people").value),
+    peopleCount: Number(document.getElementById("peopleCount").value),
     date: document.getElementById("date").value,
-    timeSlot: document.getElementById("timeSlot").value,
-    remark: document.getElementById("remark").value.trim(),
+    time: document.getElementById("timeSlot").value,
+    status: "pending",
     createdAt: serverTimestamp()
   };
 
-  if (!data.name || !data.phone || !data.company || !data.people || !data.date || !data.timeSlot) {
-    msg.textContent = "请完整填写必填信息。";
+  if (!booking.company || !booking.peopleCount || !booking.date || !booking.time) {
+    message.textContent = "请完整填写预约信息。";
+    message.className = "message error";
     return;
   }
 
   try {
-    await addDoc(collection(db, "bookings"), data);
-    sessionStorage.setItem("lastBookingName", data.name);
+    await addDoc(collection(db, "bookings"), booking);
     window.location.href = "success.html";
-  } catch (err) {
-    console.error(err);
-    msg.textContent = "提交失败，请检查 Firebase 配置或网络。";
+  } catch (error) {
+    console.error(error);
+    message.textContent = "提交失败，请检查 Firebase 配置或数据库权限。";
+    message.className = "message error";
   }
 });
