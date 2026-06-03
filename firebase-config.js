@@ -1,4 +1,4 @@
-onst firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyCoOXPUyu0OJxyLIBNUZRhzofRrAXH6mQ",
   authDomain: "visit-booking-web.firebaseapp.com",
   projectId: "visit-booking-web",
