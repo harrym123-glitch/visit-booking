@@ -1,126 +1,82 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>诺亦腾东升具身智能机器人训练中心｜参观预约</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>诺亦腾东升具身智能机器人训练中心</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <a href="index.html" class="brand"><img src="logo.webp" alt="NOITOM ROBOTICS" class="logo" /></a>
-    <nav class="nav-links">
-      <a href="#about">场地介绍</a>
-      <a href="#services">能力服务</a>
-      <a href="#booking">预约参观</a>
-      <a href="admin.html" class="admin-link">管理后台</a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="gradient-orb orb-one"></div>
-      <div class="gradient-orb orb-two"></div>
-      <p class="eyebrow">NOITOM ROBOTICS · EMBODIED INTELLIGENCE</p>
-      <h1>我们不造机器人<br />我们赋予其智能</h1>
-      <p class="subtitle">
-        围绕多模态数据采集、动作捕捉与遥操作系统，构建面向具身智能机器人的训练与数据生产空间。
-      </p>
-      <div class="hero-actions">
-        <a href="#booking" class="primary-link">预约参观</a>
-        <a href="#about" class="ghost-link">了解场地</a>
-      </div>
-    </section>
+<header class="hero">
+<div class="overlay">
+<h1>诺亦腾东升具身智能机器人训练中心</h1>
+<p>Embodied AI · Motion Capture · Robot Training</p>
+<a href="#booking" class="btn">立即预约参观</a>
+</div>
+</header>
 
-    <section id="about" class="intro-card split-card">
-      <div>
-        <p class="section-label">CENTER OVERVIEW</p>
-        <h2>让动作转化为意义</h2>
-      </div>
-      <p>
-        参照 Noitom Robotics 官网“通过多模态数据采集与完善的数据生产治理框架，赋予机器人具身智能”的方向，
-        本预约系统面向诺亦腾东升具身智能机器人训练中心的参观接待，用于展示场地能力并统一收集来访预约信息。
-      </p>
-    </section>
+<section class="intro">
+<h2>中心介绍</h2>
+<p>
+专为具身智能与机器人企业打造的高标准综合训练与数据采集平台。
+</p>
+</section>
 
-    <section class="feature-grid">
-      <article>
-        <span>01</span>
-        <h3>高质量数据</h3>
-        <p>面向机器人训练、模仿学习与遥操作验证，支持高保真人类动作与交互数据采集。</p>
-      </article>
-      <article>
-        <span>02</span>
-        <h3>多模态采集</h3>
-        <p>覆盖动作捕捉、环境感知、交互行为记录与多源数据同步，支撑复杂任务数据生产。</p>
-      </article>
-      <article>
-        <span>03</span>
-        <h3>遥操作验证</h3>
-        <p>支持机器人平台接入、操作流程验证和场景化测试，服务具身智能落地应用。</p>
-      </article>
-    </section>
+<section class="cards">
+<div class="card">
+<h3>运控训练场</h3>
+<p>支持双足、轮式、轮足机器人训练。</p>
+</div>
 
-    <section id="services" class="intro-card">
-      <p class="section-label">CAPABILITIES</p>
-      <h2>场地功能区域</h2>
-      <p class="muted-text">
-        中心围绕机器人数据生产、运动控制训练、高精度交互采集和模拟任务环境建设，形成可参观、可演示、可验证的综合训练空间。
-      </p>
-      <div class="zone-grid">
-        <span>动作捕捉区</span>
-        <span>运控训练区</span>
-        <span>高精度交互数据采集区</span>
-        <span>UMI 数据采集区</span>
-        <span>模拟场景区域</span>
-        <span>遥操作演示区域</span>
-      </div>
-    </section>
+<div class="card">
+<h3>全身动捕采集区</h3>
+<p>18颗高精度光学追踪摄像头。</p>
+</div>
 
-    <section class="quote-section">
-      <p>“我们捕捉精细入微的人类交互动作，将其转化为机器人可执行的数据。”</p>
-      <span>NOITOM ROBOTICS</span>
-    </section>
+<div class="card">
+<h3>UMI 操作采集区</h3>
+<p>支持跨本体机器人数据采集。</p>
+</div>
 
-    <section id="booking" class="booking-card">
-      <p class="section-label">VISIT BOOKING</p>
-      <h2>预约参观</h2>
-      <p class="form-note">请填写参观预约信息。提交后，工作人员将根据场地安排进行确认。</p>
-      <form id="bookingForm">
-        <label>
-          预约公司
-          <input type="text" id="company" placeholder="请输入公司 / 单位名称" required />
-        </label>
+<div class="card">
+<h3>模拟场景区域</h3>
+<p>超市、客厅、厨房、流水线等真实场景。</p>
+</div>
+</section>
 
-        <label>
-          参观人数
-          <input type="number" id="peopleCount" min="1" max="200" placeholder="请输入人数" required />
-        </label>
+<section id="booking" class="booking">
+<h2>场地参观预约</h2>
 
-        <label>
-          日期
-          <input type="date" id="date" required />
-        </label>
+<form id="bookingForm">
+<input type="text" placeholder="预约公司" required>
+<input type="number" placeholder="参观人数" required>
+<input type="date" required>
 
-        <label>
-          时间
-          <select id="timeSlot" required>
-            <option value="">请选择时间</option>
-          </select>
-        </label>
+<select required>
+<option>10:00 - 10:15</option>
+<option>10:15 - 10:30</option>
+<option>10:30 - 10:45</option>
+<option>11:00 - 11:15</option>
+<option>14:00 - 14:15</option>
+<option>15:00 - 15:15</option>
+<option>16:00 - 16:15</option>
+<option>17:00 - 17:15</option>
+</select>
 
-        <button type="submit">提交预约</button>
-        <p id="message" class="message"></p>
-      </form>
-    </section>
-  </main>
+<textarea placeholder="备注"></textarea>
 
-  <footer>
-    <img src="logo.webp" alt="NOITOM ROBOTICS" class="footer-logo" />
-    <p>我们不造机器人，我们赋予其智能</p>
-    <small>© 诺亦腾东升具身智能机器人训练中心｜场地参观预约系统</small>
-  </footer>
+<button type="submit">提交预约</button>
+</form>
 
-  <script type="module" src="app.js"></script>
+<div id="status"></div>
+</section>
+
+<footer>
+© 诺亦腾东升具身智能机器人训练中心
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
