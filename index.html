@@ -8,23 +8,64 @@
 </head>
 <body>
   <header class="site-header">
-    <img src="logo.webp" alt="NOITOM ROBOTICS" class="logo" />
-    <a href="admin.html" class="admin-link">管理后台</a>
+    <a href="index.html" class="brand"><img src="logo.webp" alt="NOITOM ROBOTICS" class="logo" /></a>
+    <nav class="nav-links">
+      <a href="#about">场地介绍</a>
+      <a href="#services">能力服务</a>
+      <a href="#booking">预约参观</a>
+      <a href="admin.html" class="admin-link">管理后台</a>
+    </nav>
   </header>
 
   <main>
     <section class="hero">
-      <p class="eyebrow">EMBODIED INTELLIGENCE TRAINING CENTER</p>
-      <h1>诺亦腾东升具身智能机器人训练中心</h1>
-      <p class="subtitle">场地参观预约系统</p>
-      <div class="hero-line"></div>
+      <div class="gradient-orb orb-one"></div>
+      <div class="gradient-orb orb-two"></div>
+      <p class="eyebrow">NOITOM ROBOTICS · EMBODIED INTELLIGENCE</p>
+      <h1>我们不造机器人<br />我们赋予其智能</h1>
+      <p class="subtitle">
+        围绕多模态数据采集、动作捕捉与遥操作系统，构建面向具身智能机器人的训练与数据生产空间。
+      </p>
+      <div class="hero-actions">
+        <a href="#booking" class="primary-link">预约参观</a>
+        <a href="#about" class="ghost-link">了解场地</a>
+      </div>
     </section>
 
-    <section class="intro-card">
-      <h2>场地介绍</h2>
+    <section id="about" class="intro-card split-card">
+      <div>
+        <p class="section-label">CENTER OVERVIEW</p>
+        <h2>让动作转化为意义</h2>
+      </div>
       <p>
-        本中心面向具身智能机器人训练、动作捕捉、数据采集、遥操作验证与多场景交互测试等需求，
-        配备动作捕捉区、运控训练区、高精度交互数据采集区、UMI 数据采集区及模拟场景区域。
+        参照 Noitom Robotics 官网“通过多模态数据采集与完善的数据生产治理框架，赋予机器人具身智能”的方向，
+        本预约系统面向诺亦腾东升具身智能机器人训练中心的参观接待，用于展示场地能力并统一收集来访预约信息。
+      </p>
+    </section>
+
+    <section class="feature-grid">
+      <article>
+        <span>01</span>
+        <h3>高质量数据</h3>
+        <p>面向机器人训练、模仿学习与遥操作验证，支持高保真人类动作与交互数据采集。</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>多模态采集</h3>
+        <p>覆盖动作捕捉、环境感知、交互行为记录与多源数据同步，支撑复杂任务数据生产。</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>遥操作验证</h3>
+        <p>支持机器人平台接入、操作流程验证和场景化测试，服务具身智能落地应用。</p>
+      </article>
+    </section>
+
+    <section id="services" class="intro-card">
+      <p class="section-label">CAPABILITIES</p>
+      <h2>场地功能区域</h2>
+      <p class="muted-text">
+        中心围绕机器人数据生产、运动控制训练、高精度交互采集和模拟任务环境建设，形成可参观、可演示、可验证的综合训练空间。
       </p>
       <div class="zone-grid">
         <span>动作捕捉区</span>
@@ -32,12 +73,19 @@
         <span>高精度交互数据采集区</span>
         <span>UMI 数据采集区</span>
         <span>模拟场景区域</span>
+        <span>遥操作演示区域</span>
       </div>
     </section>
 
-    <section class="booking-card">
+    <section class="quote-section">
+      <p>“我们捕捉精细入微的人类交互动作，将其转化为机器人可执行的数据。”</p>
+      <span>NOITOM ROBOTICS</span>
+    </section>
+
+    <section id="booking" class="booking-card">
+      <p class="section-label">VISIT BOOKING</p>
       <h2>预约参观</h2>
-      <p class="form-note">请填写参观预约信息，提交后工作人员将根据场地安排进行确认。</p>
+      <p class="form-note">请填写参观预约信息。提交后，工作人员将根据场地安排进行确认。</p>
       <form id="bookingForm">
         <label>
           预约公司
@@ -67,7 +115,11 @@
     </section>
   </main>
 
-  <footer>© 诺亦腾东升具身智能机器人训练中心｜场地参观预约系统</footer>
+  <footer>
+    <img src="logo.webp" alt="NOITOM ROBOTICS" class="footer-logo" />
+    <p>我们不造机器人，我们赋予其智能</p>
+    <small>© 诺亦腾东升具身智能机器人训练中心｜场地参观预约系统</small>
+  </footer>
 
   <script type="module" src="app.js"></script>
 </body>

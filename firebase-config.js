@@ -8,5 +8,5 @@ export const firebaseConfig = {
   measurementId: "G-5L0R7NQG9E"
 };
 
-export const ADMIN_USERNAME = "admin";
-export const ADMIN_PASSWORD = "123456";
+export const ADMIN_USERNAME = "NR";
+export const ADMIN_PASSWORD = "1418";
