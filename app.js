@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { firebaseConfig, COLLECTION_NAME } from "./firebase-config.js";
+import { firebaseConfig } from "./firebase-config.js";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -8,34 +8,35 @@ const db = getFirestore(app);
 const timeSelect = document.getElementById("time");
 const form = document.getElementById("bookingForm");
 const submitBtn = document.getElementById("submitBtn");
-const message = document.getElementById("formMessage");
+const formMessage = document.getElementById("formMessage");
 const dateInput = document.getElementById("date");
 
 function pad(n) { return String(n).padStart(2, "0"); }
 function buildTimes() {
   for (let hour = 10; hour <= 18; hour++) {
-    for (let minute = 0; minute < 60; minute += 15) {
-      if (hour === 18 && minute > 0) break;
-      const value = `${pad(hour)}:${pad(minute)}`;
-      const option = document.createElement("option");
-      option.value = value;
-      option.textContent = value;
-      timeSelect.appendChild(option);
+    for (let min = 0; min < 60; min += 15) {
+      if (hour === 18 && min > 0) continue;
+      const value = `${pad(hour)}:${pad(min)}`;
+      const opt = document.createElement("option");
+      opt.value = value;
+      opt.textContent = value;
+      timeSelect.appendChild(opt);
     }
   }
 }
 function setMinDate() {
   const today = new Date();
-  dateInput.min = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+  dateInput.min = `${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`;
 }
 
 buildTimes();
 setMinDate();
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  message.textContent = "正在提交…";
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  formMessage.textContent = "";
   submitBtn.disabled = true;
+  submitBtn.textContent = "正在提交...";
 
   const data = {
     company: document.getElementById("company").value.trim(),
@@ -47,17 +48,19 @@ form.addEventListener("submit", async (event) => {
   };
 
   if (!data.company || !data.people || !data.date || !data.time) {
-    message.textContent = "请填写完整信息。";
+    formMessage.textContent = "请完整填写预约信息。";
     submitBtn.disabled = false;
+    submitBtn.textContent = "提交预约";
     return;
   }
 
   try {
-    await addDoc(collection(db, COLLECTION_NAME), data);
+    await addDoc(collection(db, "bookings"), data);
     window.location.href = "success.html";
-  } catch (error) {
-    console.error(error);
-    message.textContent = `提交失败：${error.message}`;
+  } catch (err) {
+    console.error(err);
+    formMessage.textContent = "提交失败，请检查 Firebase 配置或数据库规则。";
     submitBtn.disabled = false;
+    submitBtn.textContent = "提交预约";
   }
 });
