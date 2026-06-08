@@ -1,53 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>预约管理后台</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>后台管理｜参观预约</title><link rel="stylesheet" href="style.css"></head>
+<body class="admin-body">
   <main class="admin-page">
-    <section id="loginBox" class="admin-login">
-      <img src="logo.webp" alt="NOITOM ROBOTICS" class="logo" />
-      <h1>管理后台</h1>
-      <input id="username" type="text" placeholder="账号" />
-      <input id="password" type="password" placeholder="密码" />
+    <section id="loginPanel" class="login-card">
+      <img src="assets/logo.webp" class="login-logo" alt="NOITOM ROBOTICS">
+      <h1>预约后台管理</h1>
+      <input id="username" placeholder="用户名">
+      <input id="password" type="password" placeholder="密码">
       <button id="loginBtn">登录</button>
-      <p id="loginMsg" class="message"></p>
+      <p id="loginMsg" class="form-message"></p>
     </section>
 
-    <section id="dashboard" class="dashboard hidden">
-      <div class="dashboard-head">
-        <div>
-          <img src="logo.webp" alt="NOITOM ROBOTICS" class="admin-logo" />
-          <h1>预约记录</h1>
-        </div>
-        <div class="admin-actions">
-          <button id="exportBtn">导出 CSV</button>
-          <button id="logoutBtn" class="secondary-btn">退出</button>
-        </div>
+    <section id="adminPanel" class="admin-panel hidden">
+      <div class="admin-top">
+        <div><img src="assets/logo.webp" class="admin-logo" alt="NOITOM ROBOTICS"><h1>预约记录</h1></div>
+        <div><button id="exportBtn" class="secondary-btn">导出 CSV</button><button id="logoutBtn" class="secondary-btn">退出</button></div>
       </div>
-
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th>预约公司</th>
-              <th>人数</th>
-              <th>日期</th>
-              <th>时间</th>
-              <th>提交时间</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody id="recordsBody"></tbody>
+          <thead><tr><th>预约公司</th><th>人数</th><th>日期</th><th>时间</th><th>提交时间</th><th>操作</th></tr></thead>
+          <tbody id="bookingRows"></tbody>
         </table>
       </div>
-      <p id="emptyMsg" class="empty-msg">暂无预约记录</p>
+      <p id="emptyText" class="empty-text">暂无预约记录</p>
     </section>
   </main>
-
-  <script type="module" src="admin.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="admin.js"></script>
 </body>
 </html>
