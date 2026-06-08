@@ -1,5 +1,4 @@
-// Firebase 配置：已根据你当前项目填写
-window.firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyCoOXPUyu0OJxyLIBNUZRhzofRrAXH6mQ",
   authDomain: "visit-booking-web.firebaseapp.com",
   projectId: "visit-booking-web",
@@ -8,5 +7,7 @@ window.firebaseConfig = {
   appId: "1:629760485189:web:387c0e7371cc772eda402c",
   measurementId: "G-5L0R7NQG9E"
 };
-window.ADMIN_USERNAME = "NR";
-window.ADMIN_PASSWORD = "1418";
+
+export const ADMIN_USERNAME = "NR";
+export const ADMIN_PASSWORD = "1418";
+export const COLLECTION_NAME = "bookings";

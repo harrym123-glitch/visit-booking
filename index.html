@@ -3,71 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>诺亦腾东升具身智能机器人训练中心｜参观预约</title>
+  <title>诺亦腾机器人 | 场地参观预约</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="nav">
-    <a class="brand" href="index.html"><img src="assets/logo.webp" alt="NOITOM ROBOTICS"></a>
-    <a class="admin-link" href="admin.html">后台管理</a>
+  <header class="site-header">
+    <a class="brand" href="https://noitomrobotics.cn/" target="_blank" rel="noopener">
+      <img src="logo.webp" alt="NOITOM ROBOTICS" />
+    </a>
+    <nav>
+      <a href="#about">中心介绍</a>
+      <a href="#booking">预约参观</a>
+      <a href="admin.html">后台</a>
+    </nav>
   </header>
 
   <main>
     <section class="hero">
-      <div class="hero-inner">
+      <div class="hero-copy">
         <p class="eyebrow">NOITOM ROBOTICS · EMBODIED AI</p>
         <h1>诺亦腾东升具身智能机器人训练中心</h1>
-        <p class="hero-sub">面向机器人企业、科研团队与产业伙伴的高标准综合训练与数据采集平台。</p>
-        <a class="primary-btn" href="#booking">预约参观</a>
+        <p class="lead">面向机器人运动训练、数据采集、遥操作与具身智能应用验证的综合训练场地。</p>
+        <a class="primary-btn" href="#booking">立即预约参观</a>
       </div>
+      <div class="orb"></div>
     </section>
 
-    <section class="intro section">
+    <section id="about" class="section intro-grid">
       <div>
-        <p class="section-label">CENTER OVERVIEW</p>
-        <h2>中心介绍</h2>
+        <p class="eyebrow">CENTER OVERVIEW</p>
+        <h2>专业化机器人训练与数据采集空间</h2>
+        <p>中心围绕具身智能机器人研发需求，配置动作捕捉、运控训练、高精度交互数据采集、UMI 数据采集与模拟场景区域，支持机器人企业进行参观交流、方案展示与场景化体验。</p>
       </div>
-      <p>中心围绕具身智能机器人训练、运动数据采集、遥操作与高精度交互数据采集建设，服务机器人本体企业、算法团队、科研机构及产业合作伙伴，支持从真实场景采集到模型训练的数据闭环。</p>
+      <div class="cards">
+        <div class="card">动作捕捉区</div>
+        <div class="card">运控训练区</div>
+        <div class="card">高精度交互数据采集区</div>
+        <div class="card">UMI 数据采集区</div>
+        <div class="card wide">模拟场景区域：超市、卧室、客厅、厨房、洗手间、流水线</div>
+      </div>
     </section>
 
-    <section class="features section">
-      <div class="feature-card"><span>01</span><h3>动作捕捉区</h3><p>支持人体运动数据采集、机器人运动训练与动作建模。</p></div>
-      <div class="feature-card"><span>02</span><h3>运控训练区</h3><p>面向机器人运动控制、行走测试与多机协同训练。</p></div>
-      <div class="feature-card"><span>03</span><h3>交互数据采集</h3><p>覆盖高精度操作、UMI 数据采集及多场景任务训练。</p></div>
-      <div class="feature-card"><span>04</span><h3>模拟场景区域</h3><p>包含超市、卧室、客厅、厨房、洗手间、流水线等场景。</p></div>
-    </section>
+    <section id="booking" class="section booking-section">
+      <div class="form-panel">
+        <p class="eyebrow">VISIT BOOKING</p>
+        <h2>参观预约</h2>
+        <p class="hint">请填写预约信息。提交后，工作人员将根据接待安排进行确认。</p>
 
-    <section id="booking" class="booking section">
-      <div class="booking-title">
-        <p class="section-label">VISIT RESERVATION</p>
-        <h2>场地参观预约</h2>
-        <p>请填写预约信息，提交后工作人员将根据接待安排进行确认。</p>
+        <form id="bookingForm">
+          <label>
+            预约公司
+            <input id="company" name="company" type="text" placeholder="请输入公司 / 单位名称" required />
+          </label>
+
+          <label>
+            参观人数
+            <input id="people" name="people" type="number" min="1" max="100" placeholder="请输入人数" required />
+          </label>
+
+          <label>
+            预约日期
+            <input id="date" name="date" type="date" required />
+          </label>
+
+          <label>
+            预约时间
+            <select id="time" name="time" required>
+              <option value="">请选择时间</option>
+            </select>
+          </label>
+
+          <button id="submitBtn" type="submit">提交预约</button>
+          <p id="formMessage" class="form-message"></p>
+        </form>
       </div>
-
-      <form id="bookingForm" class="booking-form">
-        <label>预约公司
-          <input name="company" type="text" placeholder="请输入公司/单位名称" required>
-        </label>
-        <label>参观人数
-          <input name="visitors" type="number" min="1" max="200" placeholder="请输入参观人数" required>
-        </label>
-        <label>日期
-          <input name="date" type="date" required>
-        </label>
-        <label>时间
-          <select name="time" id="timeSelect" required></select>
-        </label>
-        <button type="submit" class="submit-btn">提交预约</button>
-        <p id="formMessage" class="form-message"></p>
-      </form>
     </section>
   </main>
 
-  <footer>© NOITOM ROBOTICS｜诺亦腾东升具身智能机器人训练中心</footer>
+  <footer>
+    <span>© NOITOM ROBOTICS</span>
+    <a href="https://noitomrobotics.cn/" target="_blank" rel="noopener">访问官网</a>
+  </footer>
 
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js"></script>
-  <script src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

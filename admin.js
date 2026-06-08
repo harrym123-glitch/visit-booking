@@ -1,42 +1,98 @@
-(function(){
-  const $ = (id) => document.getElementById(id);
-  const loginPanel = $('loginPanel'), adminPanel = $('adminPanel'), loginMsg = $('loginMsg');
-  let bookings = [];
-  try { firebase.initializeApp(window.firebaseConfig); } catch(e) {}
-  const db = firebase.firestore();
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { firebaseConfig, ADMIN_USERNAME, ADMIN_PASSWORD, COLLECTION_NAME } from "./firebase-config.js";
 
-  function showAdmin(){ loginPanel.classList.add('hidden'); adminPanel.classList.remove('hidden'); loadBookings(); }
-  if (localStorage.getItem('nr_admin_logged_in') === 'yes') showAdmin();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-  $('loginBtn').addEventListener('click', () => {
-    const u = $('username').value.trim(); const p = $('password').value.trim();
-    if (u === window.ADMIN_USERNAME && p === window.ADMIN_PASSWORD) { localStorage.setItem('nr_admin_logged_in','yes'); showAdmin(); }
-    else { loginMsg.textContent = '用户名或密码错误'; loginMsg.className='form-message error'; }
-  });
-  $('logoutBtn').addEventListener('click', () => { localStorage.removeItem('nr_admin_logged_in'); location.reload(); });
+const loginPanel = document.getElementById("loginPanel");
+const dashboard = document.getElementById("dashboard");
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const loginBtn = document.getElementById("loginBtn");
+const loginMessage = document.getElementById("loginMessage");
+const bookingTable = document.getElementById("bookingTable");
+const adminMessage = document.getElementById("adminMessage");
+const refreshBtn = document.getElementById("refreshBtn");
+const exportBtn = document.getElementById("exportBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+let cache = [];
 
-  async function loadBookings(){
-    const rows = $('bookingRows'); rows.innerHTML = '<tr><td colspan="6">正在加载...</td></tr>';
-    try {
-      const snap = await db.collection('bookings').orderBy('createdAt','desc').get();
-      bookings = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      rows.innerHTML = '';
-      $('emptyText').style.display = bookings.length ? 'none' : 'block';
-      bookings.forEach(item => {
-        const created = item.createdAt && item.createdAt.toDate ? item.createdAt.toDate().toLocaleString('zh-CN') : '-';
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${escapeHtml(item.company || '')}</td><td>${item.visitors || ''}</td><td>${item.date || ''}</td><td>${item.time || ''}</td><td>${created}</td><td><button class="delete-btn" data-id="${item.id}">删除</button></td>`;
-        rows.appendChild(tr);
-      });
-      document.querySelectorAll('.delete-btn').forEach(btn => btn.onclick = async () => { if(confirm('确认删除这条预约？')) { await db.collection('bookings').doc(btn.dataset.id).delete(); loadBookings(); }});
-    } catch (err) { console.error(err); rows.innerHTML = '<tr><td colspan="6">加载失败：请检查 Firebase 配置或 Firestore 权限。</td></tr>'; }
+function isLoggedIn() { return sessionStorage.getItem("nr_admin_login") === "yes"; }
+function showDashboard() { loginPanel.classList.add("hidden"); dashboard.classList.remove("hidden"); loadBookings(); }
+function showLogin() { dashboard.classList.add("hidden"); loginPanel.classList.remove("hidden"); }
+function formatDate(ts) {
+  if (!ts) return "-";
+  try { return ts.toDate().toLocaleString("zh-CN"); } catch { return "-"; }
+}
+
+async function loadBookings() {
+  adminMessage.textContent = "正在读取预约记录…";
+  bookingTable.innerHTML = "";
+  try {
+    const q = query(collection(db, COLLECTION_NAME), orderBy("createdAt", "desc"));
+    const snap = await getDocs(q);
+    cache = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    if (cache.length === 0) {
+      bookingTable.innerHTML = `<tr><td colspan="6">暂无预约记录</td></tr>`;
+    } else {
+      bookingTable.innerHTML = cache.map(item => `
+        <tr>
+          <td>${escapeHtml(item.company || "-")}</td>
+          <td>${item.people || "-"}</td>
+          <td>${item.date || "-"}</td>
+          <td>${item.time || "-"}</td>
+          <td>${formatDate(item.createdAt)}</td>
+          <td><button class="delete-btn" data-id="${item.id}">删除</button></td>
+        </tr>
+      `).join("");
+    }
+    adminMessage.textContent = `共 ${cache.length} 条预约记录`;
+  } catch (error) {
+    console.error(error);
+    adminMessage.textContent = `读取失败：${error.message}`;
   }
-  $('exportBtn').addEventListener('click', () => {
-    const header = ['预约公司','人数','日期','时间','提交时间'];
-    const lines = bookings.map(b => [b.company||'', b.visitors||'', b.date||'', b.time||'', b.createdAt&&b.createdAt.toDate?b.createdAt.toDate().toLocaleString('zh-CN'):''].map(csv).join(','));
-    const blob = new Blob(['\ufeff' + header.join(',') + '\n' + lines.join('\n')], {type:'text/csv;charset=utf-8;'});
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = '预约记录.csv'; a.click();
-  });
-  function escapeHtml(str){return String(str).replace(/[&<>"]/g, s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s]));}
-  function csv(v){return '"' + String(v).replace(/"/g,'""') + '"';}
-})();
+}
+function escapeHtml(str) {
+  return String(str).replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[c]));
+}
+
+loginBtn.addEventListener("click", () => {
+  const user = usernameInput.value.trim();
+  const pass = passwordInput.value.trim();
+  if (user === ADMIN_USERNAME && pass === ADMIN_PASSWORD) {
+    sessionStorage.setItem("nr_admin_login", "yes");
+    loginMessage.textContent = "登录成功。";
+    showDashboard();
+  } else {
+    loginMessage.textContent = "用户名或密码错误。";
+  }
+});
+passwordInput.addEventListener("keydown", e => { if (e.key === "Enter") loginBtn.click(); });
+refreshBtn.addEventListener("click", loadBookings);
+logoutBtn.addEventListener("click", () => { sessionStorage.removeItem("nr_admin_login"); showLogin(); });
+bookingTable.addEventListener("click", async (e) => {
+  const id = e.target?.dataset?.id;
+  if (!id) return;
+  if (!confirm("确认删除这条预约记录？")) return;
+  try {
+    await deleteDoc(doc(db, COLLECTION_NAME, id));
+    await loadBookings();
+  } catch (error) {
+    adminMessage.textContent = `删除失败：${error.message}`;
+  }
+});
+exportBtn.addEventListener("click", () => {
+  const rows = [["预约公司", "人数", "日期", "时间", "提交时间"]];
+  cache.forEach(item => rows.push([item.company || "", item.people || "", item.date || "", item.time || "", formatDate(item.createdAt)]));
+  const csv = "\ufeff" + rows.map(row => row.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `预约记录-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+if (isLoggedIn()) showDashboard(); else showLogin();
