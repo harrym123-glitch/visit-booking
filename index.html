@@ -8,59 +8,52 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="hero">
-    <nav class="nav">
-      <a class="brand" href="https://noitomrobotics.cn/" target="_blank" aria-label="Noitom Robotics 官网">
-        <img src="assets/nr-logo.png" alt="NR Logo" />
+  <main class="page-shell">
+    <section class="hero-card">
+      <a class="logo-card" href="https://noitomrobotics.cn/" target="_blank" rel="noopener">
+        <img src="assets/nr-logo.png" alt="Noitom Robotics" class="brand-logo" />
       </a>
-      <a class="admin-link" href="admin.html">后台登录</a>
-    </nav>
-    <div class="hero-content">
-      <a class="logo-card" href="https://noitomrobotics.cn/" target="_blank">
-        <img src="assets/nr-logo.png" alt="NR Logo" />
-      </a>
-      <p class="eyebrow">EMBODIED AI · MOTION CAPTURE · ROBOT DATA</p>
-      <h1>中关村（海淀）具身智能产业园<br/>诺亦腾机器人跨本体数采训练中心</h1>
-      <p class="subtitle">面向具身智能、机器人训练与多模态数据采集的高标准综合训练平台。</p>
-      <a href="#booking" class="cta">立即预约参观</a>
-    </div>
-  </header>
 
-  <main>
-    <section class="section intro">
-      <div>
-        <p class="section-label">CENTER OVERVIEW</p>
-        <h2>中心介绍</h2>
-      </div>
-      <p>中心围绕机器人跨本体数据采集、动作捕捉、遥操作训练与场景化验证，提供面向产业应用的参观与展示接待服务。</p>
-    </section>
+      <p class="eyebrow">NOITOM ROBOTICS · VISIT BOOKING</p>
+      <h1>中关村（海淀）具身智能产业园·诺亦腾机器人跨本体数采训练中心</h1>
+      <p class="subtitle">面向具身智能、机器人训练、跨本体数据采集与多场景验证的参观预约入口。</p>
 
-    <section class="features">
-      <div class="feature-card"><span>01</span><h3>动作捕捉</h3><p>支持机器人训练所需人体动作与环境交互数据采集。</p></div>
-      <div class="feature-card"><span>02</span><h3>跨本体数采</h3><p>围绕不同机器人本体进行数据采集、训练与验证。</p></div>
-      <div class="feature-card"><span>03</span><h3>场景化训练</h3><p>覆盖超市、卧室、客厅、厨房、洗手间、流水线等模拟场景。</p></div>
-    </section>
-
-    <section id="booking" class="booking-section">
-      <div class="booking-panel">
-        <div class="booking-head">
-          <p class="section-label">VISIT BOOKING</p>
-          <h2>场地参观预约</h2>
-          <p>请填写预约信息，工作人员将根据排期确认参观安排。</p>
+      <form id="bookingForm" class="booking-form">
+        <div class="field">
+          <label for="company">预约公司</label>
+          <input id="company" name="company" type="text" placeholder="请输入公司 / 单位名称" required />
         </div>
-        <form id="bookingForm" class="booking-form">
-          <label>预约公司<input required name="company" placeholder="请输入公司 / 单位名称" /></label>
-          <label>参观人数<input required name="people" type="number" min="1" placeholder="请输入参观人数" /></label>
-          <label>日期<input required name="date" type="date" /></label>
-          <label>时间<select required name="time" id="timeSelect"></select></label>
-          <button type="submit">提交预约</button>
-          <p id="formStatus" class="form-status"></p>
-        </form>
+
+        <div class="grid-two">
+          <div class="field">
+            <label for="people">参观人数</label>
+            <input id="people" name="people" type="number" min="1" max="200" placeholder="例如：6" required />
+          </div>
+          <div class="field">
+            <label for="date">参观日期</label>
+            <input id="date" name="date" type="date" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="time">参观时间</label>
+          <select id="time" name="time" required>
+            <option value="">请选择时间</option>
+          </select>
+          <small>开放时间：10:00–18:00，每 15 分钟一个预约时间。</small>
+        </div>
+
+        <button id="submitBtn" type="submit">提交预约</button>
+        <p id="message" class="message"></p>
+      </form>
+
+      <div class="footer-actions">
+        <a href="admin.html">后台管理</a>
+        <span>·</span>
+        <a href="https://noitomrobotics.cn/" target="_blank" rel="noopener">进入官网</a>
       </div>
     </section>
   </main>
-
-  <footer>© 中关村（海淀）具身智能产业园 · 诺亦腾机器人跨本体数采训练中心</footer>
   <script type="module" src="app.js"></script>
 </body>
 </html>

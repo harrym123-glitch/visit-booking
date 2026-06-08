@@ -10,3 +10,4 @@ export const firebaseConfig = {
 
 export const ADMIN_USERNAME = "NR";
 export const ADMIN_PASSWORD = "1418";
+export const OFFICIAL_SITE = "https://noitomrobotics.cn/";
