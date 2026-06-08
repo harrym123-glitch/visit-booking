@@ -3,37 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>中关村（海淀）具身智能产业园·诺亦腾机器人跨本体数采训练中心｜后台管理</title>
+  <title>后台管理 - 预约记录</title>
+  <link rel="icon" href="assets/nr-logo.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div class="bg-orb orb-a"></div><div class="bg-orb orb-b"></div><div class="bg-grid"></div>
-  <header class="nav">
-    <a class="nav-logo" href="index.html"><img src="logo.webp" alt="NOITOM ROBOTICS" /></a>
-    <a class="admin-link" href="index.html">返回预约页</a>
-  </header>
-
-  <main class="admin-main">
-    <section id="loginPanel" class="booking-card admin-login">
-      <div class="section-head"><p>ADMIN</p><h2>后台登录</h2><div class="admin-project-title">中关村（海淀）具身智能产业园·诺亦腾机器人跨本体数采训练中心</div></div>
-      <form id="loginForm">
-        <label><span>用户名</span><input id="username" type="text" placeholder="请输入用户名" required /></label>
-        <label><span>密码</span><input id="password" type="password" placeholder="请输入密码" required /></label>
-        <button type="submit">登录</button>
-        <p id="loginMessage" class="form-message"></p>
-      </form>
+<body class="admin-body">
+  <main class="admin-wrap">
+    <section id="loginBox" class="admin-card login-card">
+      <a href="https://noitomrobotics.cn/" target="_blank" class="admin-logo"><img src="assets/nr-logo.png" alt="NR Logo" /></a>
+      <h1>后台管理</h1>
+      <p>中关村（海淀）具身智能产业园·诺亦腾机器人跨本体数采训练中心</p>
+      <input id="username" placeholder="用户名" />
+      <input id="password" type="password" placeholder="密码" />
+      <button id="loginBtn">登录</button>
+      <p id="loginStatus" class="form-status"></p>
     </section>
 
-    <section id="dashboard" class="dashboard hidden">
+    <section id="dashboard" class="admin-dashboard hidden">
       <div class="dashboard-head">
-        <div><p>BOOKING RECORDS</p><h1>预约记录</h1><div class="admin-project-title left">中关村（海淀）具身智能产业园·诺亦腾机器人跨本体数采训练中心</div></div>
-        <div class="dash-actions"><button id="exportBtn" class="secondary-btn">导出 CSV</button><button id="logoutBtn" class="secondary-btn">退出登录</button></div>
+        <div><h1>预约记录</h1><p>查看、导出与管理参观预约。</p></div>
+        <div class="actions"><button id="exportBtn">导出 CSV</button><button id="logoutBtn" class="ghost">退出</button></div>
       </div>
-      <div class="table-wrap">
+      <div class="table-card">
         <table>
           <thead><tr><th>预约公司</th><th>人数</th><th>日期</th><th>时间</th><th>提交时间</th><th>操作</th></tr></thead>
-          <tbody id="recordsBody"><tr><td colspan="6">正在加载...</td></tr></tbody>
+          <tbody id="bookingRows"></tbody>
         </table>
+        <p id="emptyText" class="empty">暂无预约记录</p>
       </div>
     </section>
   </main>
